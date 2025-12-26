@@ -11,8 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UserIndexRouteImport } from './routes/user/index'
+import { Route as EsportsIndexRouteImport } from './routes/esports/index'
 import { Route as AboutIndexRouteImport } from './routes/about/index'
 import { Route as UserIdRouteImport } from './routes/user/$id'
+import { Route as EsportsScoreRouteImport } from './routes/esports/score'
+import { Route as EsportsResultRouteImport } from './routes/esports/result'
+import { Route as EsportsPlayersRouteImport } from './routes/esports/players'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,6 +26,11 @@ const IndexRoute = IndexRouteImport.update({
 const UserIndexRoute = UserIndexRouteImport.update({
   id: '/user/',
   path: '/user/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsportsIndexRoute = EsportsIndexRouteImport.update({
+  id: '/esports/',
+  path: '/esports/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutIndexRoute = AboutIndexRouteImport.update({
@@ -34,38 +43,94 @@ const UserIdRoute = UserIdRouteImport.update({
   path: '/user/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EsportsScoreRoute = EsportsScoreRouteImport.update({
+  id: '/esports/score',
+  path: '/esports/score',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsportsResultRoute = EsportsResultRouteImport.update({
+  id: '/esports/result',
+  path: '/esports/result',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsportsPlayersRoute = EsportsPlayersRouteImport.update({
+  id: '/esports/players',
+  path: '/esports/players',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/esports/players': typeof EsportsPlayersRoute
+  '/esports/result': typeof EsportsResultRoute
+  '/esports/score': typeof EsportsScoreRoute
   '/user/$id': typeof UserIdRoute
   '/about': typeof AboutIndexRoute
+  '/esports': typeof EsportsIndexRoute
   '/user': typeof UserIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/esports/players': typeof EsportsPlayersRoute
+  '/esports/result': typeof EsportsResultRoute
+  '/esports/score': typeof EsportsScoreRoute
   '/user/$id': typeof UserIdRoute
   '/about': typeof AboutIndexRoute
+  '/esports': typeof EsportsIndexRoute
   '/user': typeof UserIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/esports/players': typeof EsportsPlayersRoute
+  '/esports/result': typeof EsportsResultRoute
+  '/esports/score': typeof EsportsScoreRoute
   '/user/$id': typeof UserIdRoute
   '/about/': typeof AboutIndexRoute
+  '/esports/': typeof EsportsIndexRoute
   '/user/': typeof UserIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/user/$id' | '/about' | '/user'
+  fullPaths:
+    | '/'
+    | '/esports/players'
+    | '/esports/result'
+    | '/esports/score'
+    | '/user/$id'
+    | '/about'
+    | '/esports'
+    | '/user'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/user/$id' | '/about' | '/user'
-  id: '__root__' | '/' | '/user/$id' | '/about/' | '/user/'
+  to:
+    | '/'
+    | '/esports/players'
+    | '/esports/result'
+    | '/esports/score'
+    | '/user/$id'
+    | '/about'
+    | '/esports'
+    | '/user'
+  id:
+    | '__root__'
+    | '/'
+    | '/esports/players'
+    | '/esports/result'
+    | '/esports/score'
+    | '/user/$id'
+    | '/about/'
+    | '/esports/'
+    | '/user/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EsportsPlayersRoute: typeof EsportsPlayersRoute
+  EsportsResultRoute: typeof EsportsResultRoute
+  EsportsScoreRoute: typeof EsportsScoreRoute
   UserIdRoute: typeof UserIdRoute
   AboutIndexRoute: typeof AboutIndexRoute
+  EsportsIndexRoute: typeof EsportsIndexRoute
   UserIndexRoute: typeof UserIndexRoute
 }
 
@@ -85,6 +150,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UserIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/esports/': {
+      id: '/esports/'
+      path: '/esports'
+      fullPath: '/esports'
+      preLoaderRoute: typeof EsportsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about/': {
       id: '/about/'
       path: '/about'
@@ -99,13 +171,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UserIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/esports/score': {
+      id: '/esports/score'
+      path: '/esports/score'
+      fullPath: '/esports/score'
+      preLoaderRoute: typeof EsportsScoreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/esports/result': {
+      id: '/esports/result'
+      path: '/esports/result'
+      fullPath: '/esports/result'
+      preLoaderRoute: typeof EsportsResultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/esports/players': {
+      id: '/esports/players'
+      path: '/esports/players'
+      fullPath: '/esports/players'
+      preLoaderRoute: typeof EsportsPlayersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EsportsPlayersRoute: EsportsPlayersRoute,
+  EsportsResultRoute: EsportsResultRoute,
+  EsportsScoreRoute: EsportsScoreRoute,
   UserIdRoute: UserIdRoute,
   AboutIndexRoute: AboutIndexRoute,
+  EsportsIndexRoute: EsportsIndexRoute,
   UserIndexRoute: UserIndexRoute,
 }
 export const routeTree = rootRouteImport
